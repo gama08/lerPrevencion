@@ -6,26 +6,26 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import pruebaTecnica.gestionPersona.modelos.Persona;
-import pruebaTecnica.gestionPersona.repositorios.PersonaRepositorio;
+import com.lerprevencion.prueba.persona.infraestructura.JpaPersonaRepositorio;
+import com.lerprevencion.prueba.persona.infraestructura.PersonaEntidad;
 
 @Service
 public class PersonaService {
 
     @Autowired
-    private PersonaRepositorio personaRepositorio;
+    private JpaPersonaRepositorio personaRepositorio;
 
-    public Page<Persona> obtenerListadoPersonas(Pageable pageable){
+    public Page<PersonaEntidad> obtenerListadoPersonas(Pageable pageable){
 
         return personaRepositorio.findAll(pageable);
     }
 
-    public Persona guardarPersona(Persona persona){
+    public PersonaEntidad guardarPersona(PersonaEntidad persona){
 
         return personaRepositorio.save(persona);
     }
     
-    public Persona actualizarPersona(Persona  persona){
+    public PersonaEntidad actualizarPersona(PersonaEntidad  persona){
 
         return personaRepositorio.save(persona);
     }

@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lerprevencion.prueba.persona.infraestructura.PersonaEntidad;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 
 import pruebaTecnica.gestionPersona.dto.PersonaDTO;
-import pruebaTecnica.gestionPersona.modelos.Persona;
 import pruebaTecnica.gestionPersona.servicios.PersonaService;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
@@ -31,12 +32,12 @@ public class PersonaControlador {
     ){
 
         Pageable pageable = PageRequest.of(pagina, tamanio);
-        Page<Persona> personaPage = personaService.obtenerListadoPersonas(pageable);
+        Page<PersonaEntidad> personaPage = personaService.obtenerListadoPersonas(pageable);
         return personaPage.getContent().stream().map(this::convertirAModeloDTO).collect(Collectors.toList());
         
     }
 
-    private PersonaDTO convertirAModeloDTO(Persona persona) {
+    private PersonaDTO convertirAModeloDTO(PersonaEntidad persona) {
         PersonaDTO personaDTO = new PersonaDTO();
         personaDTO.setNumeroCedulaPersona(persona.getNumeroCedulaPersona());
         personaDTO.setNombrePersona(persona.getNombrePersona());
@@ -44,8 +45,8 @@ public class PersonaControlador {
         return personaDTO;
     }
 
-    private Persona convertirADominio(PersonaDTO personaDTO) {
-        Persona persona = new Persona();
+    private PersonaEntidad convertirADominio(PersonaDTO personaDTO) {
+        PersonaEntidad persona = new PersonaEntidad();
         persona.setNumeroCedulaPersona(personaDTO.getNumeroCedulaPersona());
         persona.setNombrePersona(personaDTO.getNombrePersona());
         persona.setFechaNacimientoPersona(personaDTO.getFechaNacimientoPersona());

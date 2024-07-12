@@ -1,10 +1,8 @@
-package pruebaTecnica.gestionPersona.modelos;
+package com.lerprevencion.prueba.persona.infraestructura;
 
 import java.io.Serializable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -13,30 +11,19 @@ import java.util.Date;
 
 @Entity
 @Table(name = "persona")
-public class Persona implements Serializable{
+public class PersonaEntidad implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long idPersona;
+    @Column(name = "numero_cedula")
+    private String numeroCedulaPersona;
 
     @Column(name = "nombre", length = 50, nullable = false)
     private String nombrePersona;
-
-    @Column(name = "numero_cedula", length = 15, nullable = false)
-    private String numeroCedulaPersona;
+    
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_nacimiento", nullable = false)
     private Date fechaNacimientoPersona;
-
-    public Long getIdPersona() {
-        return idPersona;
-    }
-
-    public void setIdPersona(Long idPersona) {
-        this.idPersona = idPersona;
-    }
 
     public String getNombrePersona() {
         return nombrePersona;
