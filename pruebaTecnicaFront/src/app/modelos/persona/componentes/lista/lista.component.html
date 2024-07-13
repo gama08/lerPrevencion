@@ -1,34 +1,33 @@
-<br>
 <div class="container">
   <div class="row">
-      <h1>{{titulo}}</h1>
+    <h1>{{titulo}}</h1>
   </div>
   <br>
-  <div class="row">
+  <form [formGroup]="filtroForm" class="row">
     <div class="col">
-      <input type="text" class="form-control" placeholder="Ingrese Cedula">
+      <input type="text" class="form-control" placeholder="Ingrese Cedula" formControlName="numeroCedula">
     </div>
     <div class="col">
-      <input type="text" class="form-control" placeholder="Ingrese Nombre">
+      <input type="text" class="form-control" placeholder="Ingrese Nombre" formControlName="nombre">
     </div>
     <div class="col">
-      <input id="startDate" class="form-control" type="date" />
+      <input id="startDate" class="form-control" type="date" formControlName="fechaNacimiento" />
     </div>
     <div class="col">
-      <select class="form-select" aria-label="Default select example">
+      <select class="form-select" aria-label="Default select example" (change)="tipoOrden($event)">
         <option selected>Ordenar</option>
         <option value="desc">Descendiente</option>
         <option value="asc">Ascendente</option>
       </select>
     </div>
-  </div>
+  </form>
   <br>
   <div class="row">
     <div class="col">
       <a routerLink="crear-modificar">
         <button class="btn btn-primary">
           Crear
-      </button>
+        </button>
       </a>
     </div>
   </div>
@@ -44,23 +43,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let persona of listaPersona">
+          <tr *ngFor="let persona of listaPersona | filtroPersonas: filtroForm.value: orden">
             <td>{{persona.numeroCedula}}</td>
             <td>{{persona.nombre}}</td>
             <td>{{persona.fechaNacimiento}}</td>
             <td>
-            <button class="btn btn-success" type="button" style="border: none; margin-right:0.2rem" [routerLink]="['crear-modificar', persona.numeroCedula]">
-              Actualizar
-            </button>
-            <button class="btn btn-danger" type="button" style="border: none;" (click)="clickEliminarPersona(persona.numeroCedula)">
-                Elimnar
-            </button>
+              <button class="btn btn-success" type="button" style="border: none; margin-right:0.2rem" [routerLink]="['crear-modificar', persona.numeroCedula]">
+                Actualizar
+              </button>
+              <button class="btn btn-danger" type="button" style="border: none;" (click)="clickEliminarPersona(persona.numeroCedula)">
+                Eliminar
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-
 </div>
-
