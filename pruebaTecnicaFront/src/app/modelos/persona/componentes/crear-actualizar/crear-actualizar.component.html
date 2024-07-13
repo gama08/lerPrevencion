@@ -1,0 +1,32 @@
+<br>
+<div class="container">
+  <div class="row">
+      <h1>{{titulo}}</h1>
+  </div>
+  <br>
+  <form [formGroup]="formularioPersona">
+    <div class="row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Ingrese Cedula" formControlName="numeroCedula">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Ingrese Nombre" formControlName="nombre">
+      </div>
+      <div class="col">
+        <input id="startDate" class="form-control" type="date" formControlName="fechaNacimiento" />
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col">
+        <a>
+          <button class="btn btn-primary" (click)="personaGuardar()" [disabled]="formularioPersona.invalid">
+            {{nombreboton}}
+          </button>
+        </a>
+      </div>
+    </div>
+  </form>
+
+</div>
+

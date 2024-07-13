@@ -9,6 +9,8 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "persona")
 public class PersonaEntidad implements Serializable{
@@ -23,6 +25,7 @@ public class PersonaEntidad implements Serializable{
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_nacimiento", nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date fechaNacimientoPersona;
 
     public String getNombrePersona() {

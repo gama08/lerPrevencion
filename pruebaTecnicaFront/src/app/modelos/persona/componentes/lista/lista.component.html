@@ -1,0 +1,66 @@
+<br>
+<div class="container">
+  <div class="row">
+      <h1>{{titulo}}</h1>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Ingrese Cedula">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Ingrese Nombre">
+    </div>
+    <div class="col">
+      <input id="startDate" class="form-control" type="date" />
+    </div>
+    <div class="col">
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Ordenar</option>
+        <option value="desc">Descendiente</option>
+        <option value="asc">Ascendente</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <a routerLink="crear-modificar">
+        <button class="btn btn-primary">
+          Crear
+      </button>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Cedula</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha Nacimiento</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let persona of listaPersona">
+            <td>{{persona.numeroCedula}}</td>
+            <td>{{persona.nombre}}</td>
+            <td>{{persona.fechaNacimiento}}</td>
+            <td>
+            <button class="btn btn-success" type="button" style="border: none; margin-right:0.2rem" [routerLink]="['crear-modificar', persona.numeroCedula]">
+              Actualizar
+            </button>
+            <button class="btn btn-danger" type="button" style="border: none;" (click)="clickEliminarPersona(persona.numeroCedula)">
+                Elimnar
+            </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
