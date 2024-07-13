@@ -1,6 +1,7 @@
+<app-cargando *ngIf="cargando"></app-cargando>
 <div class="container">
   <div class="row">
-    <h1>{{titulo}}</h1>
+    <p class="fs-1 text-center" style="border-bottom: 1px solid;">{{titulo}}</p>
   </div>
   <br>
   <form [formGroup]="filtroForm" class="row">
@@ -23,19 +24,20 @@
   </form>
   <br>
   <div class="row">
-    <div class="col">
+    <div class="col d-flex justify-content-center">
       <a routerLink="crear-modificar">
-        <button class="btn btn-primary">
+        <button class="btn btn-outline-primary">
           Crear
         </button>
       </a>
     </div>
   </div>
+  <br>
   <div class="row">
     <div class="col-12">
-      <table class="table">
+      <table class="table table-hover">
         <thead>
-          <tr>
+          <tr class="text-center">
             <th scope="col">Cedula</th>
             <th scope="col">Nombre</th>
             <th scope="col">Fecha Nacimiento</th>
@@ -43,15 +45,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let persona of listaPersona | filtroPersonas: filtroForm.value: orden">
+          <tr class="text-center" *ngFor="let persona of listaPersona | filtroPersonas: filtroForm.value: orden | paginate: { itemsPerPage: 10, currentPage: pagina }">
             <td>{{persona.numeroCedula}}</td>
             <td>{{persona.nombre}}</td>
             <td>{{persona.fechaNacimiento}}</td>
             <td>
-              <button class="btn btn-success" type="button" style="border: none; margin-right:0.2rem" [routerLink]="['crear-modificar', persona.numeroCedula]">
+              <button class="btn btn-outline-success" type="button" style="border: none; margin-right:0.2rem" [routerLink]="['crear-modificar', persona.numeroCedula]">
                 Actualizar
               </button>
-              <button class="btn btn-danger" type="button" style="border: none;" (click)="clickEliminarPersona(persona.numeroCedula)">
+              <button class="btn btn-outline-danger" type="button" style="border: none;" (click)="clickEliminarPersona(persona.numeroCedula)">
                 Eliminar
               </button>
             </td>
@@ -59,5 +61,10 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="row">
+      <div class="col d-flex justify-content-center">
+        <pagination-controls  (pageChange)="pagina = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+      </div>
   </div>
 </div>

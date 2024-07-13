@@ -1,26 +1,51 @@
+<app-cargando *ngIf="cargando"></app-cargando>
 <br>
 <div class="container">
-  <div class="row">
-      <h1>{{titulo}}</h1>
+  <div class="row ">
+      <p class="fs-1 text-center" style="border-bottom: 1px solid;">{{titulo}}</p>
   </div>
   <br>
   <form [formGroup]="formularioPersona">
     <div class="row">
       <div class="col">
         <input type="text" class="form-control" placeholder="Ingrese Cedula" formControlName="numeroCedula">
+        <span *ngIf="this.formularioPersona.get('numeroCedula')?.errors?.['required']" style="color: red;">
+          Campo Obligatorio
+        </span>
+        <span *ngIf="this.formularioPersona.get('numeroCedula')?.errors?.['minlength']" style="color: red;">
+          Mínimo 6 Caracteres
+        </span>
+        <span *ngIf="this.formularioPersona.get('numeroCedula')?.errors?.['maxlength']" style="color: red;">
+          Máximo 12 Caracteres
+        </span>
       </div>
       <div class="col">
         <input type="text" class="form-control" placeholder="Ingrese Nombre" formControlName="nombre">
+        <span *ngIf="this.formularioPersona.get('nombre')?.errors?.['required']" style="color: red;">
+          Campo Obligatorio
+        </span>
+        <span *ngIf="this.formularioPersona.get('nombre')?.errors?.['minlength']" style="color: red;">
+          Mínimo 3 Caracteres
+        </span>
+        <span *ngIf="this.formularioPersona.get('nombre')?.errors?.['maxlength']" style="color: red;">
+          Máximo 40 Caracteres
+        </span>
       </div>
       <div class="col">
         <input id="startDate" class="form-control" type="date" formControlName="fechaNacimiento" />
+        <span *ngIf="this.formularioPersona.get('fechaNacimiento')?.errors?.['required']" style="color: red;">
+          Campo Obligatorio
+        </span>
       </div>
     </div>
     <br>
     <div class="row">
-      <div class="col">
+      <div class="col d-flex justify-content-center">
         <a>
-          <button class="btn btn-primary" (click)="personaGuardar()" [disabled]="formularioPersona.invalid">
+          <button *ngIf="nombreboton === 'Guardar'" class="btn btn-outline-primary" (click)="personaGuardar()" [disabled]="formularioPersona.invalid">
+            {{nombreboton}}
+          </button>
+          <button *ngIf="nombreboton === 'Actualizar'" class="btn btn-outline-success" (click)="personaGuardar()" [disabled]="formularioPersona.invalid">
             {{nombreboton}}
           </button>
         </a>

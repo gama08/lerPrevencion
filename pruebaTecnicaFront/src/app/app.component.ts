@@ -11,5 +11,5 @@ import { ListaComponent } from './modelos/persona/componentes/lista/lista.compon
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'pruebaTecnicaFront';
+  title = 'Ler Prevención';
 }
